@@ -41,7 +41,7 @@ Response:
 ## POST (/api2/places/)
 Use it to add some notice to ur list
 
-Exaple: 
+Example: 
 ```
 {
     "title": "POST_TEST 2.1",
@@ -110,7 +110,7 @@ Response:
 ## POST (/api/places/)
 Use it to add some notice to ur list
 
-Exaple: 
+Example: 
 ```
 {
     "notice": {
