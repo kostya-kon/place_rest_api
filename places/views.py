@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Notice
-from .serializers import NoticeSerializer
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
+from .models import Notice, Author
+from .serializers import NoticeSerializer, NoticeSerializer2
 from rest_framework.generics import get_object_or_404
 
 
@@ -40,3 +41,17 @@ class NoticeView(APIView):
         return Response({
             "message": "Article with id `{}` has been deleted.".format(pk)
         }, status=204)
+
+
+class Notice2View(ListCreateAPIView):
+    queryset = Notice.objects.all()
+    serializer_class = NoticeSerializer2
+
+    def perform_create(self, serializer):
+        author = get_object_or_404(Author, id=self.request.data.get('author_id'))
+        return serializer.save(author=author)
+
+
+class SingleNotice2View(RetrieveUpdateDestroyAPIView):
+    queryset = Notice.objects.all()
+    serializer_class = NoticeSerializer2

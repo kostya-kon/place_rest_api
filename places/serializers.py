@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Notice
+from .models import Notice, Author
 
 
 class NoticeSerializer(serializers.Serializer):
@@ -22,3 +22,9 @@ class NoticeSerializer(serializers.Serializer):
 
         instance.save()
         return instance
+
+
+class NoticeSerializer2(serializers.ModelSerializer):
+    class Meta:
+        model = Notice
+        fields = ('id', 'title', 'address', 'description', 'author_id')
